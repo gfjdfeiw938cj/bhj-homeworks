@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #kinput {
+  font-size: 150%;
+  box-sizing: border-box;
+  width: 95%;
+}
+
+#area {
+  width: 95%;
+  box-sizing: border-box;
+  height: 250px;
+  border: 1px solid black;
+  display: block;
+}
+
+form label {
+  display: inline;
+  white-space: nowrap;
+}
+    </style>
+</head>
+
+<body>
+    <form id="form" onsubmit="return false">
+
+        Предотвратить действие по умолчанию для:
+        <label>
+          <input type="checkbox" name="keydownStop" value="1"> keydown</label>&nbsp;&nbsp;&nbsp;
+        <label>
+          <input type="checkbox" name="keyupStop" value="1"> keyup</label>
+    
+        <p>
+          Игнорировать:
+          <label>
+            <input type="checkbox" name="keydownIgnore" value="1"> keydown</label>&nbsp;&nbsp;&nbsp;
+          <label>
+            <input type="checkbox" name="keyupIgnore" value="1"> keyup</label>
+        </p>
+    
+        <p>Сфокусируйтесь на поле и нажмите какую-нибудь клавишу.</p>
+    
+        <input type="text" placeholder="Клавишу нажимать тут" id="kinput">
+    
+        <textarea id="area"></textarea>
+        <input type="button" value="Очистить" onclick="area.value = ''" />
+      </form>
+
+
+<script>
+
+kinput.onkeydown = kinput.onkeyup = kinput.onkeypress = handle;
+
+let lastTime = Date.now();
+
+function handle(event) {
+  if (form.elements[event.type + 'Ignore'].checked) return;
+  console.log(form.elements[event.type + 'Ignore'].checked)
+  let text = event.type +
+    ' key=' + event.key +
+    ' code=' + event.code +
+    (event.shiftKey ? ' shiftKey' : '') +
+    (event.ctrlKey ? ' ctrlKey' : '') +
+    (event.altKey ? ' altKey' : '') +
+    (event.metaKey ? ' metaKey' : '') +
+    (event.repeat ? ' (repeat)' : '') +
+    "\n";
+
+  if (area.value && Date.now() - lastTime > 250) {
+    area.value += new Array(81).join('-') + '\n';
+  }
+  lastTime = Date.now();
+
+  area.value += text;
+
+  if (form.elements[event.type + 'Stop'].checked) {
+    event.preventDefault();
+  }
+}
+</script>
+    
+</body>
+</html>
