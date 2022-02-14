@@ -1,3 +1,71 @@
+
+/*                                   Стили для таймера                                           */
+
+/* Устанавливаем высоту и ширину контейнера */
+.base-timer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+/* Масштабирование картинки (transform: scaleX(-1) Зеркальное отражение по горизонтали.)*/
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+/* Удаляем стили SVG, которые могли бы скрыть временную метку */
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+/* Контур SVG, который отображает прогресс времени */
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+/* Такая же ширина, что и у исходного кольца */
+  stroke-width: 7px;
+/* Замыкаем концы линии, чтобы создать круг */
+  stroke-linecap: round;
+/* Делаем так, чтобы анимация начиналась вверху */
+  transform: rotate(90deg);
+  transform-origin: center;
+/* Одна секунда подгоняется под таймер обратного отсчета */
+  transition: 1s linear all;
+/*Свойство fill-rule определяет как будут заливаться сложные фигуры,
+ имеющие пересечения внутри себя. Для простых фигур ни на что не влияет.*/
+  fill-rule: nonzero;
+/* Задаем смену цвета кольца, когда обновляется значение цвета */
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+/* .base-timer__path-remaining.orange {
+  color: orange;
+}
+.base-timer__path-remaining.red {
+  color: red;
+} */
+
+.base-timer__label {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+/*---------------------------------------------------------------------------------------------*/
+
+
 .symbol {
   font-size: 50px;
 }
