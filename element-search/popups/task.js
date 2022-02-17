@@ -1,25 +1,17 @@
 
 let elem1 = document.getElementById('modal_success');
-let elem2 = document.getElementById('modal_main');
+
+let elems = document.querySelectorAll('.modal');
+let modalClose = document.querySelectorAll('.modal__close_times');
 
 setTimeout(() => elem1.classList.add('modal_active') ,1000);
 
-elem1.firstElementChild.lastElementChild.addEventListener("click", function() {
+Array.from(elems).forEach((el, ind) => el.onclick = (ind) => removes(ind)) 
+
+Array.from(modalClose).forEach((el,ind) => el.onclick = (ind) => removes(ind)) 
+
+function moduleClose(){
     let elements = document.querySelectorAll('.modal');
-
-    for(let el of elements){
-        if(el.getAttribute('class') == 'modal modal_active'){
-            el.classList.toggle('modal_active');
-        }else{
-            el.classList.toggle('modal_active');
-        }
-    }
-
-});
-
-elem2.firstElementChild.lastElementChild.addEventListener("click", function() {
-    let elements = document.querySelectorAll('.modal');
-
     for(let el of elements){
         if(el.getAttribute('class') == 'modal modal_active'){ 
             el.classList.toggle('modal_active');
@@ -27,15 +19,12 @@ elem2.firstElementChild.lastElementChild.addEventListener("click", function() {
             el.classList.toggle('modal_active');
         }    
     } 
+    return false
+}
 
-});
-
-elem1.firstElementChild.firstElementChild.addEventListener("click" , function(){
-    elem1.classList.remove('modal_active');
-});
-
-elem2.firstElementChild.firstElementChild.addEventListener("click" , function(){
-    elem2.classList.remove('modal_active');
-});
+function removes(i){
+    console.log(i)
+   i.target.classList.remove('modal__close_times')      
+}
 
 
