@@ -1,16 +1,21 @@
+let menu = document.querySelectorAll('.menu_sub')
 
 let menuLink = document.querySelectorAll('.menu__link');
+
+
+console.log(menuLink)
 
 Array.from(menuLink).forEach((el,ind) => el.onclick = () => checkMenu(ind)) 
 
 function checkMenu(ind) {
-	let parent = menuLink[ind].parentElement.querySelector('ul');
+	let parent = menuLink[ind].parentElement.querySelector('.menu_sub');
 
-	if (parent) {
-		let parentActive = parent.className.includes('menu_active');
+	console.log(parent)
+
+	if (parent){
 		change(menuLink[ind]);
 
-		if (parentActive) {
+		if (parent.className.includes('menu_active')){
 			parent.classList.remove('menu_active');
 		} else {
 			parent.classList.add('menu_active');
@@ -21,10 +26,11 @@ function checkMenu(ind) {
 }
 
 function change(element) {
+	console.log(element)
 	let elementActive = element.closest('.menu_main').querySelector('.menu_active');
-   console.log(elementActive)
 	if(elementActive) {
 		elementActive.classList.remove('menu_active');
 	}
+	return false;
 }
 
