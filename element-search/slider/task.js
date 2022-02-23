@@ -1,22 +1,15 @@
 let sliderArrow = document.querySelectorAll('.slider__arrow');
 let sliderItem = document.querySelectorAll('.slider__item');
-let sliderDot = document.querySelectorAll('.slider__dot');
 let pointsArr = document.querySelectorAll('.slider__dot');
-let slides = document.querySelectorAll('.slider__item');
+
 pointsArr[0].classList.add('slider__dot_active')
 Array.from(sliderArrow).forEach(el => el.onclick = changeSlide); 
 
-Array.from(sliderDot).forEach((el,ind) => el.onclick = () => {dotSlide(ind)});
+Array.from(pointsArr).forEach((el,ind) => el.onclick = () => dotSlide(ind));
 
 function changeSlide(event) {
 	let classSlideArrow = event.target.classList;
-	let slide = Array.from(slides).findIndex(el => el.getAttribute("class") == "slider__item slider__item_active")
-
-	if(Array.from(pointsArr).some(el => el.getAttribute("class") == "slider__dot slider__dot_active")){
-		pointsArr[slide].classList.toggle('slider__dot_active')
-	} else {
-		pointsArr[slide].classList.toggle('slider__dot_active')
-	}
+	let slide  = pointСhoice() 
 
 	sliderItem[slide].classList.remove('slider__item_active');
 
@@ -44,17 +37,22 @@ function changeSlide(event) {
 }
 
 Array.from(pointsArr).forEach(el => el.addEventListener("click" , function(event){
-	if(Array.from(pointsArr).some(el => el.getAttribute("class") == "slider__dot slider__dot_active")){
-        let pointInd = Array.from(pointsArr).findIndex(el => el.getAttribute("class") == "slider__dot slider__dot_active") 
-        pointsArr[pointInd].classList.remove('slider__dot_active')
-	}
+	pointСhoice()
 	event.target.classList.add('slider__dot_active')
 	let pointInd = Array.from(pointsArr).findIndex(el => el.getAttribute("class") == event.target.getAttribute("class")) 
-    let slideInd = Array.from(slides).findIndex(el => el.getAttribute("class") == "slider__item slider__item_active")
-    slides[slideInd].classList.remove('slider__item_active')
-    slides[pointInd].classList.add('slider__item_active')
+    let slideInd = Array.from(sliderItem).findIndex(el => el.getAttribute("class") == "slider__item slider__item_active")
+    sliderItem[slideInd].classList.remove('slider__item_active')
+    sliderItem[pointInd].classList.add('slider__item_active')
 }))
 
+function pointСhoice(){
+	let slide = Array.from(sliderItem).findIndex(el => el.getAttribute("class") == "slider__item slider__item_active")
+
+	if(Array.from(pointsArr).some(el => el.getAttribute("class") == "slider__dot slider__dot_active")){
+		pointsArr[slide].classList.toggle('slider__dot_active')
+	}
+	return slide
+}
 
 
 
