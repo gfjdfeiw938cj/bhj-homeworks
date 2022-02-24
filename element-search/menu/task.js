@@ -1,3 +1,5 @@
+const links = document.querySelectorAll('.menu__link');
+
 for (let link of links) {
 	console.log(link)
 	link.onclick = function () {

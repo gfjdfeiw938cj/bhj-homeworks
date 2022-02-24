@@ -16,9 +16,9 @@ function moduleClose(){
     let elements = document.querySelectorAll('.modal');
     for(let el of elements){
         if(el.getAttribute('class') == 'modal modal_active'){ 
-            el.classList.remove('modal_active');
+            el.classList.toggle('modal_active');
         }else{  
-            el.classList.add('modal_active');
+            el.classList.toggle('modal_active');
         }    
     } 
 }
